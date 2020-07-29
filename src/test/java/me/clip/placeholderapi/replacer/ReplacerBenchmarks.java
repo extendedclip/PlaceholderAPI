@@ -50,4 +50,16 @@ public class ReplacerBenchmarks
 		Values.REGEX_REPLACER.apply(Values.LARGE_TEXT, null, Values.PLACEHOLDERS::get);
 	}
 
+	@Benchmark
+	public void measureTestsReplacerSmallText()
+	{
+		Values.TESTS_REPLACER.apply(Values.SMALL_TEXT, null, Values.PLACEHOLDERS::get);
+	}
+
+	@Benchmark
+	public void measureTestsReplacerLargeText()
+	{
+		Values.TESTS_REPLACER.apply(Values.LARGE_TEXT, null, Values.PLACEHOLDERS::get);
+	}
+
 }
