@@ -229,23 +229,13 @@ public final class LocalExpansionManager implements Listener
 
 	public Optional<PlaceholderExpansion> register(@NotNull final Class<? extends PlaceholderExpansion> clazz)
 	{
-		try
+		final PlaceholderExpansion expansion = createExpansionInstance(clazz);
+		if (expansion == null || !expansion.register())
 		{
-			final PlaceholderExpansion expansion = createExpansionInstance(clazz);
-			if (expansion == null || !expansion.register())
-			{
-				return Optional.empty();
-			}
-
-			return Optional.of(expansion);
-		}
-		catch (final LinkageError ex)
-		{
-			plugin.getLogger().severe("expansion class " + clazz.getSimpleName() + " is outdated: \n" +
-									  "Failed to load due to a [" + ex.getClass().getSimpleName() + "], attempted to use " + ex.getMessage());
+			return Optional.empty();
 		}
 
-		return Optional.empty();
+		return Optional.of(expansion);
 	}
 
 	public boolean unregister(@NotNull final PlaceholderExpansion expansion)
@@ -357,13 +347,13 @@ public final class LocalExpansionManager implements Listener
 
 
 	@Nullable
-	public PlaceholderExpansion createExpansionInstance(@NotNull final Class<? extends PlaceholderExpansion> clazz) throws LinkageError
+	public PlaceholderExpansion createExpansionInstance(@NotNull final Class<? extends PlaceholderExpansion> clazz)
 	{
 		try
 		{
 			return clazz.getDeclaredConstructor().newInstance();
 		}
-		catch (final Exception ex)
+		catch (final Throwable ex)
 		{
 			plugin.getLogger().log(Level.SEVERE, "Failed to load placeholder expansion from class: " + clazz.getName(), ex);
 			return null;
