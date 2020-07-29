@@ -82,12 +82,7 @@ sourceSets {
 publishing {
 	repositories {
 		maven {
-			
-			if (version.contains("-DEV-")) {
-				url = uri("https://repo.extendedclip.com/content/repositories/dev/")
-			} else {
-				url = uri("https://repo.extendedclip.com/content/repositories/placeholderapi/")
-			}
+			url = uri("https://repo.extendedclip.com/content/repositories/public/")
 		
 			credentials {
 				username = System.getenv("JENKINS_USER")
