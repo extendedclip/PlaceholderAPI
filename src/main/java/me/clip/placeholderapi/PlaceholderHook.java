@@ -22,7 +22,6 @@ package me.clip.placeholderapi;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,8 +29,6 @@ import org.jetbrains.annotations.Nullable;
  * @deprecated This class will be completely removed in the next release, please use {@link me.clip.placeholderapi.expansion.PlaceholderExpansion}
  */
 @Deprecated
-@ApiStatus.NonExtendable
-@ApiStatus.ScheduledForRemoval(inVersion = "2.10.8")
 public abstract class PlaceholderHook
 {
 
@@ -67,7 +64,6 @@ public abstract class PlaceholderHook
 	 */
 	@Nullable
 	@Deprecated
-	@ApiStatus.ScheduledForRemoval(inVersion = "2.10.8")
 	public String onPlaceholderRequest(@Nullable final Player player, @NotNull final String params)
 	{
 		return null;
