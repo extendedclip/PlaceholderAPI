@@ -21,13 +21,8 @@
 package me.clip.placeholderapi.expansion;
 
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public interface Relational
-{
+public interface Relational {
 
-    @Nullable
-	String onPlaceholderRequest(@Nullable final Player one, @Nullable final Player two, @NotNull final String identifier);
-
+    String onPlaceholderRequest(Player one, Player two, String identifier);
 }

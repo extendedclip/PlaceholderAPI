@@ -21,7 +21,6 @@
 package me.clip.placeholderapi.expansion;
 
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * This interface allows a class which extends a {@link PlaceholderExpansion} to have the cleanup
@@ -30,14 +29,12 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Ryan McCarthy
  */
-public interface Cleanable
-{
+public interface Cleanable {
 
-	/**
-	 * Called when a player leaves the server
-	 *
-	 * @param player {@link Player} who left the server
-	 */
-	void cleanup(@NotNull final Player player);
-
+    /**
+     * Called when a player leaves the server
+     *
+     * @param p (@link Player} who left the server
+     */
+    void cleanup(Player p);
 }
