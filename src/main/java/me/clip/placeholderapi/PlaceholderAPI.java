@@ -33,7 +33,9 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -145,6 +147,20 @@ public final class PlaceholderAPI
 	// === Deprecated API ===
 
 	/**
+	 * Get map of registered placeholders
+	 *
+	 * @return Copy of the internal placeholder map
+	 */
+	@NotNull
+	@Deprecated
+	@ApiStatus.ScheduledForRemoval(inVersion = "2.10.8")
+	public static Map<String, PlaceholderHook> getPlaceholders()
+	{
+		throw new UnsupportedOperationException("PlaceholderAPI no longer provides a view of the placeholder's map!\n" +
+												"Use: PlaceholderAPIPlugin.getInstance().getLocalExpansionManager().findExpansionByIdentifier(String)");
+	}
+
+	/**
 	 * Translates all placeholders into their corresponding values.
 	 * <br>You set the pattern yourself through this method.
 	 *
@@ -182,6 +198,17 @@ public final class PlaceholderAPI
 	public static List<String> setPlaceholders(@Nullable final OfflinePlayer player, @NotNull final List<String> text, @NotNull final Pattern pattern, final boolean colorize)
 	{
 		return setPlaceholders(player, text);
+	}
+
+	@Deprecated
+	@ApiStatus.ScheduledForRemoval(inVersion = "2.10.8")
+	public static Set<PlaceholderExpansion> getExpansions()
+	{
+		Set<PlaceholderExpansion> set = getPlaceholders().values().stream()
+														 .filter(PlaceholderExpansion.class::isInstance).map(PlaceholderExpansion.class::cast)
+														 .collect(Collectors.toCollection(HashSet::new));
+
+		return ImmutableSet.copyOf(set);
 	}
 
 	/**
@@ -399,7 +426,8 @@ public final class PlaceholderAPI
 			return colorize ? Msg.color(text) : text;
 		}
 
-		final Matcher matcher = RELATIONAL_PLACEHOLDER_PATTERN.matcher(text);
+		final Matcher                      matcher = RELATIONAL_PLACEHOLDER_PATTERN.matcher(text);
+		final Map<String, PlaceholderHook> hooks   = getPlaceholders();
 
 		while (matcher.find())
 		{
@@ -411,16 +439,16 @@ public final class PlaceholderAPI
 				continue;
 			}
 
-			String                     identifier = format.substring(0, index).toLowerCase();
-			String                     params     = format.substring(index + 1);
-			final PlaceholderExpansion expansion  = PlaceholderAPIPlugin.getInstance().getLocalExpansionManager().getExpansion(identifier);
+			String                identifier = format.substring(0, index).toLowerCase();
+			String                params     = format.substring(index + 1);
+			final PlaceholderHook hook       = hooks.get(identifier);
 
-			if (!(expansion instanceof Relational))
+			if (!(hook instanceof Relational))
 			{
 				continue;
 			}
 
-			final String value = ((Relational) expansion).onPlaceholderRequest(one, two, params);
+			final String value = ((Relational) hook).onPlaceholderRequest(one, two, params);
 
 			if (value != null)
 			{
