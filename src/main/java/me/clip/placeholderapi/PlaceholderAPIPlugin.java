@@ -28,6 +28,7 @@ import me.clip.placeholderapi.expansion.manager.CloudExpansionManager;
 import me.clip.placeholderapi.expansion.manager.LocalExpansionManager;
 import me.clip.placeholderapi.listeners.ServerLoadEventListener;
 import me.clip.placeholderapi.updatechecker.UpdateChecker;
+import me.clip.placeholderapi.util.Msg;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -127,7 +128,7 @@ public final class PlaceholderAPIPlugin extends JavaPlugin
 
 		reloadConfig();
 
-		getLocalExpansionManager().load(sender);
+		getLocalExpansionManager().load();
 
 		if (config.isCloudEnabled())
 		{
@@ -137,6 +138,9 @@ public final class PlaceholderAPIPlugin extends JavaPlugin
 		{
 			getCloudExpansionManager().kill();
 		}
+
+		Msg.msg(sender,
+				getLocalExpansionManager().getIdentifiers().size() + " &aplaceholder hooks successfully registered!");
 	}
 
 
@@ -228,7 +232,7 @@ public final class PlaceholderAPIPlugin extends JavaPlugin
 		}
 		catch (final ExceptionInInitializerError | ClassNotFoundException ignored)
 		{
-			Bukkit.getScheduler().runTaskLater(this, () -> getLocalExpansionManager().load(Bukkit.getConsoleSender()), 1);
+			Bukkit.getScheduler().runTaskLater(this, getLocalExpansionManager()::load, 1);
 		}
 	}
 
