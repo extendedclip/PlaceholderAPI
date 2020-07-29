@@ -148,7 +148,7 @@ public final class CommandParse extends PlaceholderCommand
 
 	private void completeParseSingular(@NotNull final CommandSender sender, @NotNull @Unmodifiable final List<String> params, @NotNull final List<String> suggestions)
 	{
-		if (sender instanceof Player && (params.isEmpty() || (params.size() == 1 && "me".startsWith(params.get(0).toLowerCase()))))
+		if (sender instanceof Player && (params.isEmpty() || (params.size() == 1 && params.get(0).toLowerCase().startsWith("m"))))
 		{
 			suggestions.add("me");
 		}
