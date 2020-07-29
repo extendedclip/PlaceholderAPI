@@ -118,7 +118,7 @@ public final class CharsReplacer implements Replacer
 			{
 				final char p = chars[i];
 
-				if (p == ' ' && !identified)
+				if (p == ' ')
 				{
 					break;
 				}
