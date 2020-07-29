@@ -6,12 +6,12 @@
 
 ### Setup
 **[[Hook into PlaceholderAPI]]**
-- [[First steps|Hook-into-PlaceholderAPI#first-steps]]
-- [[Adding placeholders to PlaceholderAPI|Hook-into-PlaceholderAPI#adding-placeholders-to-placeholderapi]]
-  - [[PlaceholderExpansion]]
-    - [[Without an external plugin|PlaceholderExpansion#without-an-external-plugin]]
-    - [[With external plugin|PlaceholderExpansion#with-external-plugin]]
-- [[Setting placeholders in your plugin|Hook-into-PlaceholderAPI#setting-placeholders-in-your-plugin]]
+* [[First steps|Hook-into-PlaceholderAPI#first-steps]]
+* [[Adding placeholders to PlaceholderAPI|Hook-into-PlaceholderAPI#adding-placeholders-to-placeholderapi]]
+  * [[PlaceholderExpansion]]
+      * [[Without an external plugin|PlaceholderExpansion#without-an-external-plugin]]
+      * [[With external plugin|PlaceholderExpansion#with-external-plugin]]
+* [[Setting placeholders in your plugin|Hook-into-PlaceholderAPI#setting-placeholders-in-your-plugin]]
 
 ### Other
 **[[Commands]]**  
@@ -19,26 +19,21 @@
 **[[FAQ]]**  
 **[[Plugins using PlaceholderAPI]]**  
 **[[Placeholders]]**  
-- [[PAPI-placeholders|Placeholders#papi-placeholders-1]]
+(Click the arrows to expand)
+<details>
+  <summary> [[PAPI-placeholders|Placeholders#papi-placeholders-1]] </summary>
+
   - [[Advancements|Placeholders#advancements]]
-  - [[Animations|Placeholders#animations]]
-  - [[Armor|Placeholders#armor]]
-  - [[ASCII|Placeholders#ASCII]]
   - [[BungeeCord|Placeholders#bungeecord]]
-  - [[CheckItem|Placeholders#checkitem]]
   - [[CooldownBar|Placeholders#cooldownbar]]
-  - [[Formatter|Placeholders#formatter]]
+  - [[CheckItem|Placeholders#checkitem]]
   - [[Javascript|Placeholders#javascript]]
   - [[ListPlayers|Placeholders#listplayer]]
-  - [[LocalTime|Placeholders#localtime]]
   - [[Math|Placeholders#math]]
   - [[MVdW placeholders|Placeholders#mvdw-placeholders]]
   - [[OtherPlayer|Placeholders#otherplayer]]
-  - [[ParseNear|Placeholders#parsenear]]
-  - [[ParseOther|Placeholders#parseother]]
   - [[Pinger|Placeholders#pinger]]
   - [[Player|Placeholders#player]]
-  - [[PlayerList|Placeholders#playerlist]]
   - [[Plugin|Placeholders#plugin]]
   - [[Progress|Placeholders#progress]]
   - [[RainbowColor|Placeholders#rainbowcolor]]
@@ -50,8 +45,10 @@
   - [[Sound|Placeholders#sound]]
   - [[Spectators|Placeholders#spectators]]
   - [[Statistic|Placeholders#statistic]]
-  
-- [[Plugin-placeholders|Placeholders#plugin-placeholders-1]]
+</details>
+<details>
+  <summary> [[Plugin-placeholders|Placeholders#plugin-placeholders-1]] </summary>
+
   - [[A|Placeholders#a]]
   - [[B|Placeholders#b]]
   - [[C|Placeholders#c]]
@@ -76,3 +73,4 @@
   - [[V|Placeholders#v]]
   - [[W|Placeholders#w]]
   - [[Z|Placeholders#z]]
+</details>
