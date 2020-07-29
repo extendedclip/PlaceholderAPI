@@ -10,7 +10,6 @@
 # Download placeholders: /papi ecloud
 check_updates: true
 cloud_enabled: true
-cloud_sorting: "name"
 cloud_allow_unverified_expansions: false
 boolean:
   'true': 'yes'
