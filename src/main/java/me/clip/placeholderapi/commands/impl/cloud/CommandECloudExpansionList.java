@@ -149,15 +149,16 @@ public final class CommandECloudExpansionList extends PlaceholderCommand
 					   .append(". ")
 					   .append((expansion.shouldUpdate() ? "&6" : expansion.hasExpansion() ? "&a" : "&7"))
 					   .append(expansion.getName())
-					   .append(" &8[&bAuthor: &f")
+					   .append('\n')
+					   .append("    &bAuthor: &f")
 					   .append(expansion.getAuthor())
-					   .append("&8, ")
-					   .append("&bVerified: ")
+					   .append('\n')
+					   .append("    &bVerified: ")
 					   .append(expansion.isVerified() ? "&a&l✔&r" : "&c&l❌&r")
-					   .append("&8, ")
-					   .append("&bLatest Version: &f")
+					   .append('\n')
+					   .append("    &bLatest Version: &f")
 					   .append(expansion.getLatestVersion())
-					   .append("&8]");
+					   .append('\n');
 			}
 
 			Msg.msg(sender, builder.toString());
