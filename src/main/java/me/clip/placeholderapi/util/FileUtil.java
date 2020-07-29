@@ -27,8 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
@@ -45,11 +43,7 @@ public class FileUtil
 
 		final URL jar = file.toURI().toURL();
 
-		final List<String>             matches = new ArrayList<>();
-		final List<Class<? extends T>> classes = new ArrayList<>();
-
-
-		try (final JarInputStream stream = new JarInputStream(jar.openStream()); final URLClassLoader loader = new URLClassLoader(new URL[]{jar}, clazz.getClassLoader()))
+		try (final URLClassLoader loader = new URLClassLoader(new URL[]{jar}, clazz.getClassLoader()); final JarInputStream stream = new JarInputStream(jar.openStream()))
 		{
 			JarEntry entry;
 			while ((entry = stream.getNextJarEntry()) != null)
@@ -60,25 +54,21 @@ public class FileUtil
 					continue;
 				}
 
-				matches.add(name.substring(0, name.lastIndexOf('.')).replace('/', '.'));
-			}
-
-			for (final String match : matches)
-			{
 				try
 				{
-					final Class<?> loaded = loader.loadClass(match);
+					final Class<?> loaded = loader.loadClass(name.substring(0, name.lastIndexOf('.')).replace('/', '.'));
 					if (clazz.isAssignableFrom(loaded))
 					{
-						classes.add(loaded.asSubclass(clazz));
+						return loaded.asSubclass(clazz);
 					}
 				}
 				catch (final NoClassDefFoundError ignored)
-				{ }
+				{
+				}
 			}
 		}
 
-		return classes.isEmpty() ? null : classes.get(0);
+		return null;
 	}
 
 }
