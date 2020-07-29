@@ -181,20 +181,40 @@ public final class PlaceholderAPIPlugin extends JavaPlugin
 	private void setupMetrics()
 	{
 		final Metrics metrics = new Metrics(this);
-		metrics.addCustomChart(new Metrics.SimplePie("using_expansion_cloud", () -> getPlaceholderAPIConfig().isCloudEnabled() ? "yes" : "no"));
+		metrics.addCustomChart(
+				new Metrics.SimplePie(
+						"using_expansion_cloud",
+						() -> getPlaceholderAPIConfig().isCloudEnabled() ? "yes" : "no"));
 
-		metrics.addCustomChart(new Metrics.SimplePie("using_spigot", () -> getServerVersion().isSpigot() ? "yes" : "no"));
+		metrics.addCustomChart(
+				new Metrics.SimplePie("using_spigot", () -> getServerVersion().isSpigot() ? "yes" : "no"));
 
-		metrics.addCustomChart(new Metrics.AdvancedPie("expansions_used", () -> {
-			final Map<String, Integer> values = new HashMap<>();
+		metrics.addCustomChart(
+				new Metrics.AdvancedPie(
+						"expansions_used",
+						() -> {
+							Map<String, Integer>         map   = new HashMap<>();
+							Map<String, PlaceholderHook> hooks = PlaceholderAPI.getPlaceholders();
 
-			for (final PlaceholderExpansion expansion : getLocalExpansionManager().getExpansions())
-			{
-				values.put(expansion.getRequiredPlugin() == null ? expansion.getIdentifier() : expansion.getRequiredPlugin(), 1);
-			}
+							if (!hooks.isEmpty())
+							{
 
-			return values;
-		}));
+								for (PlaceholderHook hook : hooks.values())
+								{
+									if (hook instanceof PlaceholderExpansion)
+									{
+										PlaceholderExpansion expansion = (PlaceholderExpansion) hook;
+										map.put(
+												expansion.getRequiredPlugin() == null
+												? expansion.getIdentifier()
+												: expansion.getRequiredPlugin(),
+												1);
+									}
+								}
+							}
+
+							return map;
+						}));
 	}
 
 	private void setupExpansions()
