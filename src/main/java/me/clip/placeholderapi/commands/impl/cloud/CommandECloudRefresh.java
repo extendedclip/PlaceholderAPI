@@ -24,7 +24,7 @@ public final class CommandECloudRefresh extends PlaceholderCommand
 		plugin.getCloudExpansionManager().fetch(plugin.getPlaceholderAPIConfig().cloudAllowUnverifiedExpansions());
 
 		Msg.msg(sender,
-				"&aThe eCloud Manager has been refreshed!");
+				"&aThe ECloud Manager has been refreshed!");
 	}
 
 }
