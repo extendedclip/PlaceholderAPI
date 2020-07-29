@@ -17,6 +17,7 @@ public final class CommandECloudToggle extends PlaceholderCommand
 		super("toggle", "enable", "disable");
 	}
 
+
 	@Override
 	public void evaluate(@NotNull final PlaceholderAPIPlugin plugin, @NotNull final CommandSender sender, @NotNull final String alias, @NotNull @Unmodifiable final List<String> params)
 	{
@@ -38,7 +39,8 @@ public final class CommandECloudToggle extends PlaceholderCommand
 
 		if (desiredState == currentState)
 		{
-			Msg.msg(sender, "&7The eCloud Manager is already " + (desiredState ? "enabled" : "disabled"));
+			Msg.msg(sender,
+					"&7The eCloud Manager is already " + (desiredState ? "enabled" : "disabled"));
 			return;
 		}
 
@@ -46,14 +48,15 @@ public final class CommandECloudToggle extends PlaceholderCommand
 
 		if (desiredState)
 		{
-			plugin.getCloudExpansionManager().load();
+			plugin.enableCloud();
 		}
 		else
 		{
-			plugin.getCloudExpansionManager().kill();
+			plugin.disableCloud();
 		}
 
-		Msg.msg(sender, "&aThe eCloud Manager has been " + (desiredState ? "enabled" : "disabled"));
+		Msg.msg(sender,
+				"&aThe eCloud Manager has been " + (desiredState ? "enabled" : "disabled"));
 	}
 
 }

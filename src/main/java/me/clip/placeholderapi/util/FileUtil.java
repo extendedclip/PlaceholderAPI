@@ -38,33 +38,45 @@ public class FileUtil
 {
 
 	@NotNull
-	public static <T> List<@NotNull Class<? extends T>> getClasses(@NotNull final File folder, @NotNull final Class<T> clazz) throws IOException, ClassNotFoundException
+	public static <T> List<@NotNull Class<? extends T>> getClasses(@NotNull final File folder, @NotNull final Class<T> clazz)
 	{
 		return getClasses(folder, clazz, null);
 	}
 
 	@NotNull
-	public static <T> List<@NotNull Class<? extends T>> getClasses(@NotNull final File folder, @NotNull final Class<T> clazz, @Nullable final String target) throws IOException, ClassNotFoundException
+	public static <T> List<@NotNull Class<? extends T>> getClasses(@NotNull final File folder, @NotNull final Class<T> clazz, @Nullable final String target)
 	{
 		if (!folder.exists())
 		{
 			return Collections.emptyList();
 		}
 
-		final File[] jars = folder.listFiles((dir, name) -> name.endsWith(".jar") && (target == null || name.replace(".jar", "").equalsIgnoreCase(target.replace(".jar", ""))));
-		if (jars == null)
+		try
 		{
-			return Collections.emptyList();
+			final FilenameFilter filter =
+					(dir, name) -> name.endsWith(".jar") && (target == null || name.replace(".jar", "").equalsIgnoreCase(target.replace(".jar", "")));
+
+			final File[] jars = folder.listFiles(filter);
+			if (jars == null)
+			{
+				return Collections.emptyList();
+			}
+
+			final List<@NotNull Class<? extends T>> list = new ArrayList<>();
+
+			for (File file : jars)
+			{
+				gather(file.toURI().toURL(), clazz, list);
+			}
+
+			return list;
+		}
+		catch (final Throwable ex)
+		{
+			ex.printStackTrace();
 		}
 
-		final List<@NotNull Class<? extends T>> list = new ArrayList<>();
-
-		for (final File file : jars)
-		{
-			gather(file.toURI().toURL(), clazz, list);
-		}
-
-		return list;
+		return Collections.emptyList();
 	}
 
 	private static <T> void gather(@NotNull final URL jar, @NotNull final Class<T> clazz, @NotNull final List<@NotNull Class<? extends T>> list) throws IOException, ClassNotFoundException
@@ -89,8 +101,7 @@ public class FileUtil
 					}
 				}
 				catch (final NoClassDefFoundError ignored)
-				{
-				}
+				{ }
 			}
 		}
 	}

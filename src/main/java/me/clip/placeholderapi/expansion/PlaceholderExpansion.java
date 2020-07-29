@@ -108,7 +108,8 @@ public abstract class PlaceholderExpansion extends PlaceholderHook {
      * @return true if this hook meets all the requirements to register
      */
     public boolean canRegister() {
-        return getRequiredPlugin() == null || Bukkit.getPluginManager().getPlugin(getRequiredPlugin()) != null;
+        return getRequiredPlugin() == null
+                || Bukkit.getPluginManager().getPlugin(getRequiredPlugin()) != null;
     }
 
     /**
@@ -118,7 +119,7 @@ public abstract class PlaceholderExpansion extends PlaceholderHook {
      */
     public boolean register() {
         Validate.notNull(getIdentifier(), "Placeholder identifier can not be null!");
-        return canRegister() && getPlaceholderAPI().getLocalExpansionManager().register(this);
+        return PlaceholderAPI.registerExpansion(this);
     }
 
     /**

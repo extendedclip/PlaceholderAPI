@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.List;
-import java.util.Optional;
 
 public final class CommandInfo extends PlaceholderCommand
 {
@@ -30,7 +29,7 @@ public final class CommandInfo extends PlaceholderCommand
 			return;
 		}
 
-		final PlaceholderExpansion expansion = plugin.getLocalExpansionManager().findExpansionByName(params.get(0)).orElse(null);
+		final PlaceholderExpansion expansion = plugin.getExpansionManager().getRegisteredExpansion(params.get(0));
 		if (expansion == null)
 		{
 			Msg.msg(sender,
