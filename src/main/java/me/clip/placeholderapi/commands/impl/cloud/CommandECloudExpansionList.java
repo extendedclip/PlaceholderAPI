@@ -1,23 +1,3 @@
-/*
- * This file is part of PlaceholderAPI
- *
- * PlaceholderAPI
- * Copyright (c) 2015 - 2020 PlaceholderAPI Team
- *
- * PlaceholderAPI free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * PlaceholderAPI is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
-
 package me.clip.placeholderapi.commands.impl.cloud;
 
 import com.google.common.base.Strings;
@@ -27,7 +7,6 @@ import com.google.common.collect.Sets;
 import com.google.common.primitives.Ints;
 import me.clip.placeholderapi.PlaceholderAPIPlugin;
 import me.clip.placeholderapi.commands.PlaceholderCommand;
-import me.clip.placeholderapi.configuration.ExpansionSort;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.clip.placeholderapi.expansion.cloud.CloudExpansion;
 import me.clip.placeholderapi.util.Format;
@@ -43,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +85,7 @@ public final class CommandECloudExpansionList extends PlaceholderCommand
 			return;
 		}
 
-		expansions.sort(plugin.getPlaceholderAPIConfig().getExpansionSort().orElse(ExpansionSort.LATEST));
+		expansions.sort(Comparator.comparing(CloudExpansion::getLastUpdate).reversed());
 
 		if (!(sender instanceof Player) && params.size() < 2)
 		{
