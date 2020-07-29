@@ -1,6 +1,6 @@
 ---
 name: Request change (Wiki)  
-about: It is recommendet to instead make a Pull request for the changes.
+about: Request a update/change of a wiki-page
 
 ---
 
@@ -10,8 +10,6 @@ Please use the [Request change (PlaceholderAPI)] template to ask for additions/c
 For reporting bugs of PlaceholderAPI use the [Bug report] template.
 
 Also make sure that the [wiki] doesn't already have the change and that there isn't a issue about this change on the [issues] page.
-
-**We highly recommend to instead make a [Pull request] for the wiki pages you want to change. Read more [here][wiki_folder].**
 
 ### Type
 > What kind of change is it? (Multiple selections possible)
@@ -38,4 +36,3 @@ An already listed expansion/plugin has new placeholders or old ones have changed
 [Bug report]: https://github.com/PlaceholderAPI/PlaceholderAPI/issues/new?template=bug_report.md
 [issues]: https://github.com/PlaceholderAPI/PlaceholderAPI/issues
 [wiki]: https://github.com/PlaceholderAPI/PlaceholderAPI/wiki
-[wiki_folder]: https://github.com/PlaceholderAPI/PlaceholderAPI/tree/master/wiki
